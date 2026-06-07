@@ -6,6 +6,12 @@
 #include "raycast.h"
 #include "map.h"
 
+#define BIOS_USER_MODE   (*(volatile u8 *)0x10fdaf)
+#define BIOS_PLAYER_MOD1 (*(volatile u8 *)0x10fdb6)
+#define USER_MODE_GAME   2
+void player_start(void) { BIOS_USER_MODE = USER_MODE_GAME; BIOS_PLAYER_MOD1 = 1; }
+void coin_sound(void)   { }
+
 /* ---- palette setup --------------------------------------------------- */
 static void init_palettes(void) {
     /* index 0 of every palette is transparent for sprites; we keep walls
@@ -142,6 +148,9 @@ int main(void) {
     init_walls();
     rc_init();
     draw_minimap();                     /* static walls, drawn once           */
+
+    BIOS_USER_MODE = USER_MODE_GAME;    /* break out of attract cycle    */
+    BIOS_PLAYER_MOD1 = 1;
 
     for (;;) {
         u8 pressed = (u8)~REG_P1CNT;    

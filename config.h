@@ -58,8 +58,11 @@
 #define PAL_DEPTH_BASE 8            /* lit: 8..13, dark: 14..19              */
 
 /* ---- movement feel --------------------------------------------------- */
-#define MOVE_SPEED 0.12             
-#define ROT_COS    0.99452        
-#define ROT_SIN    0.10453        
+#define MOVE_SPEED 0.12
+#define NANG     256
+#define ROT_STEP 4
+#define FOV      0.66
+#define ANG_COS  0.99969882
+#define ANG_SIN  0.02454123
 
 #endif /* CONFIG_H */

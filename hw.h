@@ -36,6 +36,7 @@ typedef int32_t  s32;
 static inline void vram_addr(u16 a) { REG_VRAMADDR = a; }
 static inline void vram_mod(u16 m)  { REG_VRAMMOD = m; }
 static inline void vram_w(u16 v)    { REG_VRAMRW = v; }
+static inline void vram_w_nop(u16 v) { REG_VRAMRW = v; __asm__ volatile("nop"); }
 static inline void vram_poke(u16 a, u16 v) { REG_VRAMADDR = a; REG_VRAMRW = v; }
 
 /* ---- watchdog: must be kicked every frame or the board resets ------- */
